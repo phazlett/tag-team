@@ -40,10 +40,20 @@ You invoke `@tag-team <problem>` in the Copilot Chat panel. The extension acts a
 
 ```bash
 npm install
-npm run build && npx @vscode/vsce package --no-dependencies
+npm run package:vsix
 ```
 
 Then press **F5** ("Run Tag-Team Extension") to open an Extension Development Host.
+
+## Marketplace package
+
+Run the packaging command below to produce the distributable VSIX:
+
+```bash
+npm run package:vsix
+```
+
+The generated file will be written to the project root as `tag-team-llm-<version>.vsix`.
 
 ## Settings
 

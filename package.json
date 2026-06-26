@@ -3,13 +3,34 @@
   "displayName": "Tag-Team LLM Coding",
   "description": "Put Claude Code and GitHub Copilot in structured debate to break the guess-patch-repeat loop on complex codebases.",
   "version": "0.1.0",
-  "publisher": "phazlett",
+  "publisher": "ChameleonTek",
   "license": "MIT",
   "icon": "icon.png",
+  "preview": true,
+  "keywords": [
+    "copilot",
+    "claude",
+    "ai",
+    "chat",
+    "coding",
+    "debugging"
+  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/phazlett/tag-team-llm.git"
+    "url": "https://github.com/phazlett/tag-team.git"
   },
+  "homepage": "https://github.com/phazlett/tag-team#readme",
+  "bugs": {
+    "url": "https://github.com/phazlett/tag-team/issues"
+  },
+  "files": [
+    "dist/**",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "icon.png",
+    "package.json"
+  ],
   "engines": {
     "vscode": "^1.95.0"
   },
@@ -86,7 +107,8 @@
     "vscode:prepublish": "npm run build",
     "build": "node ./esbuild.js --production",
     "watch": "node ./esbuild.js --watch",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "package:vsix": "npx @vscode/vsce package --no-dependencies"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
