@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm -v)",
+      "Bash(echo \"npm: $\\(npm -v 2>/dev/null || echo MISSING\\)\")",
+      "Bash(command -v claude)",
+      "Bash(echo \"claude: $\\(command -v claude || echo MISSING\\)\")",
+      "Bash(npx -y typescript@latest --version)",
+      "Bash(npm install *)",
+      "Bash(npx tsc *)",
+      "Bash(echo \"=== typecheck exit: $? ===\")",
+      "Bash(node ./esbuild.js --production)",
+      "Bash(echo \"=== build exit: $? ===\")"
+    ]
+  }
+}

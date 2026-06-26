@@ -1,0 +1,100 @@
+{
+  "name": "tag-team-llm",
+  "displayName": "Tag-Team LLM Coding",
+  "description": "Put Claude Code and GitHub Copilot in structured debate to break the guess-patch-repeat loop on complex codebases.",
+  "version": "0.1.0",
+  "publisher": "phazlett",
+  "license": "MIT",
+  "icon": "icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/phazlett/tag-team-llm.git"
+  },
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "categories": [
+    "AI",
+    "Chat",
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "chatParticipants": [
+      {
+        "id": "tag-team",
+        "name": "tag-team",
+        "fullName": "Tag-Team Claude and Copilot",
+        "description": "Two LLMs debate a root cause before any edit. Try: @tag-team why does login hang on refresh?",
+        "isSticky": true,
+        "commands": [
+          {
+            "name": "apply",
+            "description": "Apply the agreed change set via Claude after a checkpoint"
+          },
+          {
+            "name": "auto-resolve",
+            "description": "Debate and auto-apply if both models agree on the root cause"
+          },
+          {
+            "name": "again",
+            "description": "Run another debate round on the same problem"
+          }
+        ]
+      }
+    ],
+    "configuration": {
+      "title": "Tag-Team LLM",
+      "properties": {
+        "tagTeam.claudePath": {
+          "type": "string",
+          "default": "claude",
+          "description": "Path to the Claude Code CLI binary. Use an absolute path if `claude` is not on the PATH that VS Code sees (e.g. ~/.claude/local/claude)."
+        },
+        "tagTeam.claudeModel": {
+          "type": "string",
+          "default": "",
+          "description": "Optional Claude model override passed to `claude -p --model`. Leave blank to use the CLI default."
+        },
+        "tagTeam.copilotFamily": {
+          "type": "string",
+          "default": "gpt-4o",
+          "description": "Copilot model family requested via vscode.lm.selectChatModels (e.g. gpt-4o, gpt-4.1, o1)."
+        },
+        "tagTeam.turnCap": {
+          "type": "number",
+          "default": 3,
+          "minimum": 1,
+          "maximum": 8,
+          "description": "Maximum debate rounds before forcing a human checkpoint."
+        },
+        "tagTeam.autoResolve": {
+          "type": "boolean",
+          "default": false,
+          "description": "When true, Claude automatically applies the agreed change as soon as both models converge on a root cause — no approval prompt. If they never converge, you still decide."
+        },
+        "tagTeam.claudeTimeoutMs": {
+          "type": "number",
+          "default": 180000,
+          "description": "Timeout in milliseconds for a single Claude headless turn."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "node ./esbuild.js --production",
+    "watch": "node ./esbuild.js --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/vscode": "^1.95.0",
+    "esbuild": "^0.28.1",
+    "typescript": "^5.6.0"
+  },
+  "allowScripts": {
+    "esbuild@0.28.1": true
+  }
+}
